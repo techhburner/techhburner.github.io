@@ -53,10 +53,7 @@ margin:6px 6px 0 0;
 cursor:pointer;
 border:none;
 }
-.btn2{
-background:#fff;
-border:2px solid #222;
-}
+.btn2{background:#fff;border:2px solid #222;}
 
 /* HERO */
 .hero{
@@ -65,10 +62,7 @@ grid-template-columns:1fr 1fr;
 gap:28px;
 align-items:center;
 }
-.hero h1{
-font-size:56px;
-line-height:1.15;
-}
+.hero h1{font-size:56px;line-height:1.15;}
 .hero p{
 font-size:18px;
 line-height:1.8;
@@ -289,6 +283,7 @@ height:38px;
 
 </section>
 
+<!-- PROGRAMS SECTION KEPT EXACTLY AS PROVIDED -->
 <section class="wrap" id="programs">
 
 <h2>Programs</h2>
@@ -431,6 +426,50 @@ height:38px;
 
 </section>
 
+<!-- GALLERY -->
+<section class="wrap" id="gallery">
+<h2>Gallery</h2>
+
+<div class="gallery-box">
+<button class="nav-btn prev" onclick="prevSlide()">❮</button>
+
+<div class="gallery-frame">
+<img class="slide active" src="final%20Images/group4.jpeg" onclick="openLightbox(this.src)">
+<img class="slide" src="final%20Images/group3.jpeg" onclick="openLightbox(this.src)">
+<img class="slide" src="final%20Images/group2.jpeg" onclick="openLightbox(this.src)">
+<img class="slide" src="final%20Images/Group1.jpg" onclick="openLightbox(this.src)">
+<img class="slide" src="final%20Images/Liveclass1.jpg" onclick="openLightbox(this.src)">
+<img class="slide" src="final%20Images/award.jpg" onclick="openLightbox(this.src)">
+<img class="slide" src="final%20Images/podeum.jpg" onclick="openLightbox(this.src)">
+<img class="slide" src="final%20Images/potrait-front.jpeg" onclick="openLightbox(this.src)">
+<img class="slide" src="final%20Images/potrait-cross.jpeg" onclick="openLightbox(this.src)">
+</div>
+
+<button class="nav-btn next" onclick="nextSlide()">❯</button>
+</div>
+</section>
+
+<div id="lightbox" onclick="closeLightbox()">
+<img id="lightbox-img">
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="wrap" id="testimonials">
+<h2>Student Testimonials</h2>
+
+<div class="video-grid">
+<video controls playsinline preload="metadata">
+<source src="final%20Images/testimonial1.mp4" type="video/mp4">
+</video>
+
+<video controls playsinline preload="metadata">
+<source src="final%20Images/testimonial2.mp4" type="video/mp4">
+</video>
+</div>
+
+</section>
+
+<!-- CONTACT -->
 <section class="wrap contact" id="contact">
 
 <div class="card">
@@ -441,6 +480,7 @@ height:38px;
 </div>
 
 <form class="card" id="bookingForm">
+
 <input type="text" id="name" placeholder="Full Name" required>
 <input type="text" id="phone" placeholder="Phone Number" required>
 <input type="email" id="email" placeholder="Email Address" required>
@@ -458,6 +498,7 @@ height:38px;
 <textarea id="message" placeholder="Message"></textarea>
 
 <button type="submit" class="btn">Submit Booking</button>
+
 </form>
 
 </section>
@@ -514,9 +555,8 @@ console.log(err);
 
 });
 
-/* CARD ANIMATION */
+/* CARD REVEAL */
 const cards=document.querySelectorAll('.program-block');
-
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
@@ -524,8 +564,29 @@ entry.target.classList.add('show');
 }
 });
 },{threshold:.12});
-
 cards.forEach(card=>observer.observe(card));
+
+/* GALLERY */
+let currentSlide=0;
+const slides=document.querySelectorAll(".slide");
+
+function showSlide(n){
+slides.forEach(s=>s.classList.remove("active"));
+currentSlide=(n+slides.length)%slides.length;
+slides[currentSlide].classList.add("active");
+}
+function nextSlide(){showSlide(currentSlide+1);}
+function prevSlide(){showSlide(currentSlide-1);}
+setInterval(nextSlide,3500);
+
+/* LIGHTBOX */
+function openLightbox(src){
+document.getElementById("lightbox").style.display="flex";
+document.getElementById("lightbox-img").src=src;
+}
+function closeLightbox(){
+document.getElementById("lightbox").style.display="none";
+}
 
 /* TRAINER EFFECT */
 window.addEventListener("scroll",function(){
