@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rudra Skills Hub</title>
+
+<link rel="icon" type="image/jpeg" href="final%20Images/rsh.jpg">
+<link rel="shortcut icon" href="final%20Images/rsh.jpg">
+<link rel="apple-touch-icon" href="final%20Images/rsh.jpg">
+<meta name="theme-color" content="#ffd54a">
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{
+font-family:Arial,sans-serif;
+scroll-behavior:smooth;
+background:linear-gradient(180deg,#fff,#fff8c9,#fff);
+color:#222;
+overflow-x:hidden;
+}
+img,video{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:1200px;margin:auto;padding:55px 4%;}
+
+/* HEADER */
+header{
+position:sticky;
+top:0;
+z-index:999;
+background:#ffffffef;
+backdrop-filter:blur(8px);
+padding:14px 4%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+header h2{font-size:24px;font-weight:800;}
+nav{display:flex;gap:15px;flex-wrap:wrap;}
+nav a{font-size:14px;font-weight:700;}
+
+/* BUTTON */
+.btn{
+display:inline-block;
+padding:13px 18px;
+border-radius:30px;
+background:#ffd54a;
+font-weight:700;
+margin:6px 6px 0 0;
+cursor:pointer;
+border:none;
+}
+.btn2{
+background:#fff;
+border:2px solid #222;
+}
+
+/* HERO */
+.hero{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:28px;
+align-items:center;
+}
+.hero h1{
+font-size:56px;
+line-height:1.15;
+}
+.hero p{
+font-size:18px;
+line-height:1.8;
+color:#555;
+margin:16px 0;
+}
+.hero-trainer img{
+width:100%;
+height:760px;
+object-fit:cover;
+border-radius:24px;
+box-shadow:0 20px 45px rgba(0,0,0,.18);
+transition:transform .25s linear,opacity .25s linear;
+}
+.trainer-name{
+font-size:28px;
+font-weight:800;
+text-align:center;
+margin-top:14px;
+}
+.trainer-role{
+text-align:center;
+color:#666;
+margin-top:5px;
+}
+
+/* CARD */
+.card{
+background:#fff;
+padding:24px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+margin-top:20px;
+}
+.alt{background:#fff9d8;}
+
+.program-block{
+border-top:4px solid #ffd54a;
+transition:all .35s ease;
+transform:translateY(30px);
+opacity:0;
+}
+.program-block.show{
+transform:translateY(0);
+opacity:1;
+}
+.program-block:hover{
+transform:translateY(-8px) scale(1.01);
+box-shadow:0 18px 45px rgba(0,0,0,.14);
+}
+.program-block h3{
+font-size:30px;
+margin-bottom:14px;
+}
+.program-block h4{
+font-size:20px;
+margin:16px 0 10px;
+}
+.program-block p{
+line-height:1.9;
+margin-bottom:12px;
+color:#444;
+}
+.program-block ul{
+padding-left:22px;
+line-height:1.9;
+}
+
+/* GALLERY */
+.gallery-box{position:relative;margin-top:20px;}
+.gallery-frame{
+background:#fff;
+padding:15px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+min-height:380px;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+.slide{
+display:none;
+max-width:100%;
+max-height:350px;
+object-fit:contain;
+border-radius:16px;
+cursor:pointer;
+}
+.slide.active{display:block;}
+.nav-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:42px;
+height:42px;
+border:none;
+border-radius:50%;
+background:#ffd54a;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+}
+.prev{left:8px;}
+.next{right:8px;}
+
+/* LIGHTBOX */
+#lightbox{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.92);
+z-index:9999;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+#lightbox img{
+max-width:95%;
+max-height:95%;
+border-radius:16px;
+}
+
+/* VIDEO */
+.video-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+margin-top:20px;
+}
+video{
+width:100%;
+border-radius:18px;
+background:#000;
+}
+
+/* CONTACT */
+.contact{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
+}
+input,select,textarea{
+width:100%;
+padding:14px;
+margin:8px 0;
+border:1px solid #ddd;
+border-radius:14px;
+font-size:16px;
+}
+textarea{
+resize:vertical;
+min-height:120px;
+}
+#status{margin-top:10px;font-weight:700;}
+
+footer{
+background:#111;
+color:#fff;
+text-align:center;
+padding:30px 4%;
+margin-top:40px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+.hero,.video-grid,.contact{grid-template-columns:1fr;}
+header{flex-direction:column;align-items:flex-start;}
+.hero-trainer img{height:auto;max-height:620px;}
+}
+@media(max-width:768px){
+.wrap{padding:42px 4%;}
+.hero h1{font-size:36px;}
+nav{display:none;}
+.btn{display:block;width:100%;text-align:center;}
+.gallery-frame{min-height:260px;padding:10px;}
+.slide{max-height:240px;}
+.nav-btn{
+top:auto;
+bottom:10px;
+transform:none;
+width:38px;
+height:38px;
+}
+.prev{left:10px;}
+.next{right:10px;}
+.program-block h3{font-size:26px;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Rudra Skills Hub</h2>
+<nav>
+<a href="#programs">Programs</a>
+<a href="#gallery">Gallery</a>
+<a href="#testimonials">Testimonials</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<section class="wrap hero">
+
+<div>
+<h1>Build Confidence.<br>Build Career.</h1>
+<p>Upgrade your communication, interview, personality, and English speaking skills with Rudra Skills Hub and build a successful future.</p>
+<a href="#contact" class="btn">Book Appointment</a>
+<a href="#programs" class="btn btn2">Explore Programs</a>
+</div>
+
+<div class="hero-trainer">
+<img id="trainerImage" src="final%20Images/black-blazer-potrait.jpeg" alt="Rahul Avula">
+<div class="trainer-name">Rahul Avula</div>
+<div class="trainer-role">Lead Trainer • Rudra Skills Hub</div>
+</div>
+
+</section>
+
+<section class="wrap" id="programs">
+
+<h2>Programs</h2>
+
+<div class="card program-block">
+<h3>Communication Skills Training</h3>
+
+<p>Build strong communication skills and create better career opportunities with our professional Communication Skills Training Program. This course is designed for students, job seekers, graduates, and working professionals who want to improve their English communication, confidence, and workplace interaction skills. Strong communication is essential to succeed in interviews, corporate jobs, and multinational companies.</p>
+
+<p>Our training focuses on practical learning methods, interactive sessions, and real-time speaking practice to help you communicate effectively in personal and professional environments.</p>
+
+<h4>What You Will Learn:</h4>
+<ul>
+<li>Develop active listening and understanding abilities</li>
+<li>Functional grammar to speak clear and correct English</li>
+<li>Build effective vocabulary for daily and professional use</li>
+<li>Role plays and interactive communication activities</li>
+<li>Group speaking exercises to improve fluency</li>
+<li>Debates to enhance confidence and self-expression</li>
+<li>Public speaking and presentation skills</li>
+<li>Correct pronunciation and accent improvement</li>
+<li>Reading skills for better comprehension</li>
+<li>Professional E-mail writing guidance</li>
+<li>Non-verbal communication and body language skills</li>
+</ul>
+
+<h4>Why Choose This Course?</h4>
+<ul>
+<li>Practical speaking sessions</li>
+<li>Confidence-building activities</li>
+<li>Corporate communication techniques</li>
+<li>Career-focused training</li>
+<li>Ideal for students and job seekers</li>
+</ul>
+</div>
+
+<div class="card program-block alt">
+<h3>Interview Skills Training</h3>
+
+<p>Get fully prepared to crack interviews with our expert Interview Skills Training Program. We provide hands-on practice for all major interview rounds conducted by companies, startups, and multinational organizations. Through mock interviews and expert guidance, candidates become job-ready and confident.</p>
+
+<p>Our training helps participants understand interview expectations, answer confidently, and present themselves professionally.</p>
+
+<h4>What You Will Learn:</h4>
+<ul>
+<li>Personal Introduction Round (PIR) preparation</li>
+<li>HR Interview Round and Frequently Asked Questions</li>
+<li>Group Discussion (GD) training</li>
+<li>Telephonic Interview Round practice</li>
+<li>Resume preparation and professional guidance</li>
+<li>Grooming, etiquette, and interview behavior</li>
+<li>4 Mock Interviews with detailed feedback</li>
+<li>Build a professional and positive attitude</li>
+</ul>
+
+<h4>Benefits of Our Interview Program:</h4>
+<ul>
+<li>Real interview practice sessions</li>
+<li>Resume improvement support</li>
+<li>Better confidence and body language</li>
+<li>Learn professional answers</li>
+<li>Higher chances of job selection</li>
+</ul>
+</div>
+
+<div class="card program-block">
+<h3>Personality Development Training</h3>
+
+<p>Success depends not only on academic knowledge but also on strong personality and soft skills. Our Personality Development Training Program helps individuals improve confidence, attitude, discipline, leadership qualities, and personal growth.</p>
+
+<p>This course is highly beneficial for students, professionals, entrepreneurs, and anyone who wants to become more successful in career and life.</p>
+
+<h4>What You Will Learn:</h4>
+<ul>
+<li>Build healthy human relations and interpersonal skills</li>
+<li>Time management and productivity skills</li>
+<li>Goal setting and achievement strategies</li>
+<li>Mind control and willpower development</li>
+<li>Power of positive habits and discipline</li>
+<li>Leadership skill development</li>
+<li>Self-confidence to face challenges</li>
+<li>Positive mental attitude and motivation</li>
+</ul>
+
+<h4>Why Join Personality Development Training?</h4>
+<ul>
+<li>Improve confidence and communication</li>
+<li>Become more disciplined and focused</li>
+<li>Develop leadership mindset</li>
+<li>Learn success habits</li>
+<li>Better career and life growth</li>
+</ul>
+</div>
+
+<div class="card program-block alt">
+<h3>Spoken English Course</h3>
+
+<p>Our Spoken English Course is specially designed for non-English medium students, beginners, job seekers, and anyone who wants to speak English fluently and confidently. We use simple, practical, and easy-to-understand methods so learners can improve quickly and start speaking confidently in real-life situations.</p>
+
+<h4>What You Will Learn:</h4>
+<ul>
+<li>Improve listening skills in English</li>
+<li>Learn and use new words daily</li>
+<li>Basic grammar for spoken English</li>
+<li>Daily conversations and sentence practice</li>
+<li>Reading simple passages confidently</li>
+<li>Pronunciation improvement</li>
+<li>Writing correct English sentences</li>
+<li>Stage speaking and presentation practice</li>
+<li>Confidence building to speak English fluently</li>
+</ul>
+
+<h4>Benefits of Joining:</h4>
+<ul>
+<li>Beginner-friendly teaching methods</li>
+<li>Fast confidence improvement</li>
+<li>Daily speaking practice</li>
+<li>Interview and workplace English support</li>
+<li>Suitable for students and professionals</li>
+</ul>
+</div>
+
+<div class="card program-block">
+<h3>Why Choose Rudra Skill Hub?</h3>
+<ul>
+<li>Experienced trainers</li>
+<li>Practical learning approach</li>
+<li>Career-oriented programs</li>
+<li>Affordable fee structure</li>
+<li>Individual attention</li>
+<li>Placement-focused training</li>
+<li>Friendly and motivating environment</li>
+</ul>
+</div>
+
+<div class="card program-block alt">
+<h3>Enroll Today</h3>
+<p>Upgrade your communication, interview, personality, and English speaking skills with Rudra Skill Hub and build a successful future. Contact us today for admissions and free consultation.</p>
+</div>
+
+</section>
+
+<section class="wrap contact" id="contact">
+
+<div class="card">
+<h2>Book Appointment</h2>
+<p>Email: rudraskillhub@gmail.com</p>
+<p style="margin-top:10px;">Phone: +91 7075021593</p>
+<p id="status"></p>
+</div>
+
+<form class="card" id="bookingForm">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="text" id="phone" placeholder="Phone Number" required>
+<input type="email" id="email" placeholder="Email Address" required>
+
+<select id="category" required>
+<option value="">Select Category</option>
+<option>Student</option>
+<option>Professional</option>
+<option>Unemployed</option>
+<option>Other</option>
+</select>
+
+<input type="text" id="course" value="Spoken English" readonly>
+<input type="text" id="time" placeholder="Preferred Time">
+<textarea id="message" placeholder="Message"></textarea>
+
+<button type="submit" class="btn">Submit Booking</button>
+</form>
+
+</section>
+
+<footer>
+Rudra Skills Hub © 2026 | Build Confidence. Build Career.
+</footer>
+
+<script>
+emailjs.init({publicKey:"ehGPvJmevj_17IyYA"});
+
+/* FORM */
+document.getElementById("bookingForm").addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const form=this;
+const status=document.getElementById("status");
+
+const data={
+name:name.value,
+phone:phone.value,
+email:email.value,
+category:category.value,
+course:course.value,
+time:time.value,
+message:message.value
+};
+
+status.innerText="Submitting...";
+
+try{
+
+await emailjs.send("service_kg0uock","template_swhuc8u",data);
+
+await fetch(
+"https://script.google.com/macros/s/AKfycbyDRVEThInix1EFS3inVoLoi5wTZ1Bgb6YrC1JzqXDNfW6RbWeDFP0x-MrU7U7yQPVC/exec",
+{
+method:"POST",
+mode:"no-cors",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(data)
+}
+);
+
+status.innerText="Appointment booked successfully!";
+form.reset();
+course.value="Spoken English";
+
+}catch(err){
+status.innerText="Submission failed.";
+console.log(err);
+}
+
+});
+
+/* CARD ANIMATION */
+const cards=document.querySelectorAll('.program-block');
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+});
+},{threshold:.12});
+
+cards.forEach(card=>observer.observe(card));
+
+/* TRAINER EFFECT */
+window.addEventListener("scroll",function(){
+const img=document.getElementById("trainerImage");
+if(!img)return;
+
+let y=window.scrollY;
+let scale=Math.max(.86,1-(y/1800));
+let rotate=Math.min(6,y/140);
+let move=y*0.06;
+let opacity=Math.max(.72,1-(y/1600));
+
+img.style.transform=`translateY(${move}px) scale(${scale}) rotateY(${rotate}deg)`;
+img.style.opacity=opacity;
+});
+</script>
+
+</body>
+</html>
