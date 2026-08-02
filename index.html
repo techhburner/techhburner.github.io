@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RUDRA's SKILLS HUB (Thershub.in)</title>
+<title>Rudra Skills Hub</title>
 
 <link rel="icon" type="image/jpeg" href="final%20Images/rsh.jpg">
 <link rel="shortcut icon" href="final%20Images/rsh.jpg">
@@ -62,12 +62,12 @@ grid-template-columns:1fr 1fr;
 gap:28px;
 align-items:center;
 }
-.hero h1{font-size:52px;line-height:1.15;}
+.{font-size:56px;line-height:1.15;}
 .hero p{
 font-size:18px;
 line-height:1.8;
 color:#555;
-margin:16px 0;
+marghero h1in:16px 0;
 }
 .hero-trainer img{
 width:100%;
@@ -257,7 +257,7 @@ height:38px;
 <body>
 
 <header>
-<h2> RUDRA'S SKILLS HUB (thershub.in) </h2>
+<h2>Rudra Skills Hub</h2>
 <nav>
 <a href="#programs">Programs</a>
 <a href="#gallery">Gallery</a>
@@ -269,7 +269,7 @@ height:38px;
 <section class="wrap hero">
 
 <div>
-<h1>YOU TOO CAN<br>SPEAK ENGLISH CONFIDENTLY!</h1>
+<h1>You Too Can<br>Speak English Confidently!</h1>
 <p>Upgrade your communication, interview, personality, and English speaking skills with Rudra Skills Hub and build a successful future.</p>
 <a href="#contact" class="btn">Book Appointment</a>
 <a href="#programs" class="btn btn2">Explore Programs</a>
@@ -475,7 +475,7 @@ height:38px;
 
 <div class="card">
 <h2>Book Appointment</h2>
-<p><p>Email: info@thershub.in</p></p>
+<p>Email: info@thershub.in</p>
 <p style="margin-top:10px;">Phone:+91 8885585352</p>
 <p id="status"></p>
 </div>
@@ -494,7 +494,13 @@ height:38px;
 <option>Other</option>
 </select>
 
-<input type="text" id="course" value="Spoken English" readonly>
+<select id="course" required>
+    <option value="">Select Course</option>
+    <option>Spoken English Course</option>
+    <option>Communication Skills Training</option>
+    <option>Interview Skills Training</option>
+    <option>Personality Development Training</option>
+</select>
 <input type="text" id="time" placeholder="Preferred Time">
 <textarea id="message" placeholder="Message"></textarea>
 
@@ -519,17 +525,22 @@ e.preventDefault();
 const form=this;
 const status=document.getElementById("status");
 
-const data={
-name:name.value,
-phone:phone.value,
-email:email.value,
-category:category.value,
-course:course.value,
-time:time.value,
-message:message.value
+const data = {
+    name: document.getElementById("name").value,
+    from_name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    email: document.getElementById("email").value,
+    reply_to: document.getElementById("email").value,
+    category: document.getElementById("category").value,
+    course: document.getElementById("course").value,
+    time: document.getElementById("time").value,
+    message: document.getElementById("message").value
 };
+const submitBtn = form.querySelector("button[type='submit']");
 
-status.innerText="Submitting...";
+submitBtn.disabled = true;
+submitBtn.innerText = "Submitting...";
+status.innerText = "Submitting...";
 
 try{
 
@@ -545,13 +556,22 @@ body:JSON.stringify(data)
 }
 );
 
-status.innerText="Appointment booked successfully!";
+status.innerText = "✅ Appointment booked successfully!";
 form.reset();
-course.value="Spoken English";
+course.selectedIndex = 0;
+
+submitBtn.disabled = false;
+submitBtn.innerText = "Submit Booking";
 
 }catch(err){
-status.innerText="Submission failed.";
+
+status.innerText = "❌ Submission failed. Please try again.";
+
+submitBtn.disabled = false;
+submitBtn.innerText = "Submit Booking";
+
 console.log(err);
+
 }
 
 });
